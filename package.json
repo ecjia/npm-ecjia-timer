@@ -1,0 +1,9 @@
+{
+  "name": "ecjia-timer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@ecjia/notification-center": "^1.0.1"
+  }
+}
