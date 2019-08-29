@@ -1,5 +1,5 @@
 {
-  "name": "ecjia-timer",
+  "name": "@ecjia/ecjia-timer",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
