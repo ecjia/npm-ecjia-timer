@@ -5,9 +5,11 @@ import {EcjiaNotificationCenter} from "@ecjia/notification-center";
 
 export class EcjiaTimer {
 
-    static EcjiaGlobalTimerKey = 'ecjia-global-timer';
-
     constructor() {
+        //static property
+        this.constructor.EcjiaGlobalTimerKey = 'ecjia-global-timer';
+
+        //new propery
         this.notification = EcjiaNotificationCenter.getInstance();
         this.timer = null;
     }
@@ -16,7 +18,7 @@ export class EcjiaTimer {
      * 启动定时器
      */
     start() {
-        this.timer = setInterval(this.timerRunNotification, 1000);
+        this.timer = setInterval(this.timerRunNotification.bind(this), 1000);
     }
 
     /**
@@ -30,8 +32,8 @@ export class EcjiaTimer {
      * 定时器执行方法
      */
     timerRunNotification() {
-        // ecjia.log('timerRunNotification');
-        this.notification.postNotificationName(EcjiaTimer.EcjiaGlobalTimerKey);
+        // console.log('timerRunNotification');
+        this.notification.postNotificationName(this.constructor.EcjiaGlobalTimerKey);
     }
 
     /**
@@ -39,25 +41,21 @@ export class EcjiaTimer {
      * @param observer
      */
     addListener(observer) {
-        this.notification.addNotification(EcjiaTimer.EcjiaGlobalTimerKey, 'timerNotification', observer)
+        this.notification.addNotification(this.constructor.EcjiaGlobalTimerKey, 'timerNotification', observer)
     }
 
     /**
      * 移除监听
      */
     removeListener(observer) {
-        this.notification.removeNotification(EcjiaTimer.EcjiaGlobalTimerKey, observer);
+        this.notification.removeNotification(this.constructor.EcjiaGlobalTimerKey, observer);
     }
-
-
-    static instance = null;
 
     //静态方法
     static getInstance() {
         if (! this.instance) {
             this.instance = new EcjiaTimer();
         }
-
         return this.instance;
     }
 
